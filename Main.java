@@ -8,24 +8,28 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    public static RandomGenerator randomGenerator;
+    public static HistogramDataRetriever histogramDataRetriever;
+
 
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        double a = 4;
-        double m = 10000;
-        double R = 16;
+        double a = 1987;
+        double m = 1000000;
+        double R = 2287;
         double tempR = R;
-        RandomGenerator randomGenerator = new RandomGenerator();
+        randomGenerator = new RandomGenerator();
+        histogramDataRetriever = new HistogramDataRetriever();
         for(int i = 0; i < RandomGenerator.n; i++)
         {
             tempR = randomGenerator.Lemer(a, m, tempR);
-
         }
-       // for(Double number : randomGenerator.getRandomNumbersList())
-       //     System.out.print(" " + number.doubleValue());
+       System.out.println(randomGenerator.getRandomNumbersList());
 
         randomGenerator.calculateSeqPeriod();
+        histogramDataRetriever.calculateFrequencies(randomGenerator.getRandomNumbersList());
+        System.out.println(histogramDataRetriever.getFrequenciesList());
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 1400, 800));

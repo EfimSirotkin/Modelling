@@ -5,11 +5,11 @@ import java.util.ArrayList;
 
 public class RandomGenerator {
 
-    public static int n = 100000;
+    public static int n = 100;
 
     double mathExpectation;
     double seqDispersion;
-    double seqPeriod;
+    int seqPeriod;
     private ArrayList<Double> randomNumbersList;
 
     public RandomGenerator()
@@ -29,9 +29,6 @@ public class RandomGenerator {
         return seqPeriod;
     }
 
-    public void setSeqPeriod(double seqPeriod) {
-        this.seqPeriod = seqPeriod;
-    }
 
     public double getMathExpectation() {
         return mathExpectation;
@@ -60,19 +57,19 @@ public class RandomGenerator {
     public void calculateSeqPeriod()
     {
         double x0 = randomNumbersList.get(0);
+        int listSize = randomNumbersList.size();
 
-        int seqPeriod1 = 0;
-        int seqPeriod2 = 0;
-        int seqPeriod3 = 0;
-        for(int i = 1; i < randomNumbersList.size() - 1; i++)
+        for(int i = 2; i < listSize - 1; i++)
         {
             if(randomNumbersList.get(i) == x0) {
                 seqPeriod = i - 0;
                 break;
             }
         }
+        if(seqPeriod == 0)
+            seqPeriod = randomNumbersList.size();
 
-        System.out.println("\n*seq period: 1) " + seqPeriod1 + "  2) " + seqPeriod2 + " 3) " + seqPeriod3);
+        System.out.println("Period: " + seqPeriod);
     }
 
     public void calculateAperiodic()
