@@ -7,15 +7,13 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.TextField;
-import sun.rmi.runtime.Log;
+import javafx.scene.control.Label;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 import static sample.Main.randomGenerator;
@@ -23,8 +21,6 @@ import static sample.Main.randomGenerator;
 public class Controller implements Initializable {
 
 
-    @FXML
-    private Button calculateButton;
     @FXML
     private BarChart<String,Number> HistogramChart;
     @FXML
@@ -37,19 +33,28 @@ public class Controller implements Initializable {
     private CategoryAxis xAxis;
     @FXML
     private NumberAxis yAxis;
-
+    @FXML
+    private Label mathExpectationLabel;
+    @FXML
+    private Label dispersionLabel;
+    @FXML
+    private Label secondaryQualityIdentifierLabel;
+    @FXML
+    private Label periodLabel;
+    @FXML
+    private Label aperiodicLengthLabel;
+    @FXML
+    private Label deviationLabel;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        randomGenerator = new RandomGenerator();
-        //Main.histogramDataRetriever = new HistogramDataRetriever();
-
-    }
+    public void initialize(URL location, ResourceBundle resources) {}
 
     @FXML
     public void onButtonStartClicked() {
 
         Main.histogramDataRetriever = new HistogramDataRetriever();
+        randomGenerator = new RandomGenerator();
+        HistogramChart.getData().clear();
         String stringValue = null;
         int aFieldValue = 0;
         int mFieldValue = 0;
@@ -73,12 +78,23 @@ public class Controller implements Initializable {
 
         System.out.println(randomGenerator.getRandomNumbersList());
 
-        randomGenerator.calculateSeqPeriod();
         Main.histogramDataRetriever.calculateFrequencies(randomGenerator.getRandomNumbersList());
         System.out.println(Main.histogramDataRetriever.getFrequenciesList());
 
         HistogramChart.getData().add(getHistogramBarChartSeries());
 
+        randomGenerator.calculateSeqPeriod();
+        randomGenerator.calculateAverage();
+        randomGenerator.calсulateDispersion();
+        randomGenerator.calculateAperiodicLength();
+        randomGenerator.calculateDeviation();
+
+        mathExpectationLabel.setText(String.valueOf(randomGenerator.getMathExpectation()));
+        dispersionLabel.setText((String.valueOf(randomGenerator.getSeqDispersion())));
+        secondaryQualityIdentifierLabel.setText(String.valueOf(randomGenerator.getSecondaryQuality()));
+        periodLabel.setText(String.valueOf(randomGenerator.getSeqPeriod()));
+        aperiodicLengthLabel.setText((String.valueOf(randomGenerator.getSeqAperiodicLength())));
+        deviationLabel.setText(String.valueOf(randomGenerator.getSeqDeviation()));
     }
 
     @FXML
@@ -97,6 +113,7 @@ public class Controller implements Initializable {
             tempSeries.getData().add(new XYChart.Data<>(valueOfStep, sourceFrequencyList.get(i)));
             range+= step;
             bigDecimal = new BigDecimal(Double.toString(range));
+            bigDecimal = bigDecimal.setScale(2, RoundingMode.HALF_UP);
             valueOfStep = String.valueOf(bigDecimal.doubleValue());
         }
         return tempSeries;

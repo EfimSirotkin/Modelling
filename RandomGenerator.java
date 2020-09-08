@@ -1,15 +1,24 @@
 package sample;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 
 public class RandomGenerator {
 
-    public static int n = 100;
+    public static int n = 1000000;
 
-    double mathExpectation;
-    double seqDispersion;
-    int seqPeriod;
+    private double mathExpectation;
+    private double seqDispersion;
+    private double seqDeviation;
+    private int seqPeriod;
+    private int seqAperiodicLength;
+
+    public int getSeqAperiodicLength() {
+        return seqAperiodicLength;
+    }
+
     private ArrayList<Double> randomNumbersList;
 
     public RandomGenerator()
@@ -25,7 +34,7 @@ public class RandomGenerator {
         this.seqDispersion = seqDispersion;
     }
 
-    public double getSeqPeriod() {
+    public int getSeqPeriod() {
         return seqPeriod;
     }
 
@@ -72,12 +81,12 @@ public class RandomGenerator {
         System.out.println("Period: " + seqPeriod);
     }
 
-    public void calculateAperiodic()
-    {
-        if(seqPeriod != 0)
-        {
+    public void calculateAperiodicLength() {
+        if(seqPeriod!= 0)
+            seqAperiodicLength = n % seqPeriod;
 
-        }
+        else
+            seqAperiodicLength = 0;
     }
 
     public void calculateAverage()
@@ -85,8 +94,9 @@ public class RandomGenerator {
         double sum = 0;
         for(Double number : randomNumbersList)
             sum+= number;
-
-        mathExpectation = sum / n;
+        BigDecimal bigDecimal = new BigDecimal(sum/n);
+        bigDecimal = bigDecimal.setScale(4, RoundingMode.HALF_UP);
+        mathExpectation = bigDecimal.doubleValue();
     }
 
     public void calсulateDispersion()
@@ -95,18 +105,32 @@ public class RandomGenerator {
         for(Double number : randomNumbersList)
             sum += Math.pow(number - mathExpectation, 2);
 
-        seqDispersion = sum / n;
+        BigDecimal bigDecimal = new BigDecimal(sum/n);
+        bigDecimal = bigDecimal.setScale(4, RoundingMode.HALF_UP);
+        seqDispersion = bigDecimal.doubleValue();
     }
 
-    public void checkSecondaryQuality()
+    public void calculateDeviation()
+    {
+        BigDecimal bigDecimal = new BigDecimal(Math.sqrt(seqDispersion));
+        bigDecimal = bigDecimal.setScale(4, RoundingMode.HALF_UP);
+        seqDeviation = bigDecimal.doubleValue();
+    }
+
+    public double getSeqDeviation() {
+        return seqDeviation;
+    }
+
+    public double getSecondaryQuality()
     {
         double counter = 0;
-        double qualityIdentifier = 0;
         for(int i = 0; i < n; i+= 2)
         {
             if(Math.pow(randomNumbersList.get(i), 2) + Math.pow(randomNumbersList.get(i+1),2) < 1)
                 counter++;
         }
-        qualityIdentifier = 2 * counter / n;
+
+        System.out.println("Quality: " + 2 * counter / n);
+        return 2 * counter / n;
     }
 }

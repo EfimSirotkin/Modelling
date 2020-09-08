@@ -15,14 +15,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        double a = 1987;
-        double m = 1000000;
-        double R = 2287;
-        double tempR = R;
-
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Моделирование, лаб. №1");
-        primaryStage.setScene(new Scene(root, 1400, 800));
+        primaryStage.setScene(new Scene(root, 1400, 500));
         primaryStage.show();
     }
 

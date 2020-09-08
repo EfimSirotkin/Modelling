@@ -15,7 +15,7 @@
 <VBox fx:controller="sample.Controller"
       xmlns:fx="http://javafx.com/fxml">
     <padding>
-        <Insets top = "40" left = "40" right="40" bottom="40">
+        <Insets top="40" left="40" right="40" bottom="40">
         </Insets>
     </padding>
     <children>
@@ -32,9 +32,9 @@
                             </font>
                         </Text>
                         <TextField fx:id="aTextField" promptText="a">
-                        <font>
-                            <Font name = "Verdana Bold Italic" size="14"></Font>
-                        </font>
+                            <font>
+                                <Font name="Verdana Bold Italic" size="14"></Font>
+                            </font>
                         </TextField>
                     </children>
                 </HBox>
@@ -51,7 +51,7 @@
                         </Text>
                         <TextField fx:id="mTextField" promptText="m">
                             <font>
-                                <Font name = "Verdana Bold Italic" size="14"></Font>
+                                <Font name="Verdana Bold Italic" size="14"></Font>
                             </font>
                         </TextField>
                     </children>
@@ -72,20 +72,97 @@
                         </font>
                     </TextField>
                 </HBox>
+                <VBox spacing="12">
+                    <HBox spacing="20">
+                        <Text text="Математическое ожидание: ">
+                            <font>
+                                <Font name="Verdana Bold Italic" size="14"></Font>
+                            </font>
+                        </Text>
+                        <Label fx:id="mathExpectationLabel">
+                            <font>
+                                <Font name="Verdana Bold" size="18"></Font>
+                            </font>
+                        </Label>
+                    </HBox>
+                    <HBox spacing="20">
+                        <Text text="Дисперсия: ">
+                            <font>
+                                <Font name="Verdana Bold Italic" size="14"></Font>
+                            </font>
+                        </Text>
+                        <Label fx:id="dispersionLabel">
+                            <font>
+                                <Font name="Verdana Bold" size="18"></Font>
+                            </font>
+                        </Label>
+                    </HBox>
+                    <HBox spacing="20">
+                        <Text text="СКО: ">
+                            <font>
+                                <Font name="Verdana Bold Italic" size="14"></Font>
+                            </font>
+                        </Text>
+                        <Label fx:id="deviationLabel">
+                            <font>
+                                <Font name="Verdana Bold" size="18"></Font>
+                            </font>
+                        </Label>
+                    </HBox>
+                    <HBox spacing="20">
+                        <Text text="Косвенный коэффициент качества: ">
+                            <font>
+                                <Font name="Verdana Bold Italic" size="14"></Font>
+                            </font>
+                        </Text>
+                        <Label fx:id="secondaryQualityIdentifierLabel">
+                            <font>
+                                <Font name="Verdana Bold" size="18"></Font>
+                            </font>
+                        </Label>
+                    </HBox>
+
+                    <HBox spacing="20">
+                        <Text text="Период: ">
+                            <font>
+                                <Font name="Verdana Bold Italic" size="14"></Font>
+                            </font>
+                        </Text>
+                        <Label fx:id="periodLabel">
+                            <font>
+                                <Font name="Verdana Bold" size="18"></Font>
+                            </font>
+                        </Label>
+                    </HBox>
+
+
+                    <HBox spacing="20">
+                        <Text text="Отрезок апериодичности: ">
+                            <font>
+                                <Font name="Verdana Bold Italic" size="14"></Font>
+                            </font>
+                        </Text>
+                        <Label fx:id="aperiodicLengthLabel">
+                            <font>
+                                <Font name="Verdana Bold" size="18"></Font>
+                            </font>
+                        </Label>
+                    </HBox>
+                </VBox>
                 <HBox alignment="TOP_RIGHT">
                     <padding>
-                        <Insets top="15"></Insets>
+                        <Insets top="30"></Insets>
                     </padding>
-                    <Button  text="Запустить" prefWidth="200" onAction="#onButtonStartClicked">
+                    <Button text="Запустить" prefWidth="200" onAction="#onButtonStartClicked">
                         <font>
-                            <Font name ="Verdana Italic" size="16"></Font>
+                            <Font name="Verdana Italic" size="16"></Font>
                         </font>
                     </Button>
                 </HBox>
 
             </VBox>
             <VBox>
-                <BarChart fx:id="HistogramChart">
+                <BarChart fx:id="HistogramChart" prefWidth="900" prefHeight="400">
                     <xAxis>
                         <CategoryAxis label="Интервалы значений" side="BOTTOM" fx:id="xAxis"/>
                     </xAxis>
@@ -93,18 +170,6 @@
                         <NumberAxis label="Частоты значений" side="LEFT" fx:id="yAxis"/>
                     </yAxis>
                 </BarChart>
-                <VBox>
-                    <HBox>
-                        <Text text="Математическое ожидание: "></Text>
-                    </HBox>
-                    <HBox>
-                        <Text text="Дисперсия: "></Text>
-                    </HBox>
-                    <HBox>
-                        <Text text="Среднее квадратическое отклонение: "></Text>
-                    </HBox>
-                </VBox>
-
             </VBox>
 
         </HBox>
