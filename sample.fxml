@@ -76,7 +76,7 @@
                     <padding>
                         <Insets top="15"></Insets>
                     </padding>
-                    <Button  text="Запустить" prefWidth="200" >
+                    <Button  text="Запустить" prefWidth="200" onAction="#onButtonStartClicked">
                         <font>
                             <Font name ="Verdana Italic" size="16"></Font>
                         </font>
