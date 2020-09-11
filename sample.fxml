@@ -110,7 +110,7 @@
                         </Label>
                     </HBox>
                     <HBox spacing="20">
-                        <Text text="Косвенный коэффициент качества: ">
+                        <Text text="Коэффициент качества: ">
                             <font>
                                 <Font name="Verdana Bold Italic" size="14"></Font>
                             </font>

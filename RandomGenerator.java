@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class RandomGenerator {
 
-    public static int n = 1000000;
+    public static int n = 10000000;
 
     private double mathExpectation;
     private double seqDispersion;
@@ -30,9 +30,6 @@ public class RandomGenerator {
         return seqDispersion;
     }
 
-    public void setSeqDispersion(double seqDispersion) {
-        this.seqDispersion = seqDispersion;
-    }
 
     public int getSeqPeriod() {
         return seqPeriod;
@@ -43,17 +40,11 @@ public class RandomGenerator {
         return mathExpectation;
     }
 
-    public void setMathExpectation(double mathExpectation) {
-        this.mathExpectation = mathExpectation;
-    }
 
     public ArrayList<Double> getRandomNumbersList() {
         return randomNumbersList;
     }
 
-    public void setRandomNumbersList(ArrayList<Double> randomNumbersList) {
-        this.randomNumbersList = randomNumbersList;
-    }
 
     public double Lemer(double a, double m, double R)
     {
@@ -66,27 +57,34 @@ public class RandomGenerator {
     public void calculateSeqPeriod()
     {
         double x0 = randomNumbersList.get(0);
+        int numbersCount = 1;
         int listSize = randomNumbersList.size();
 
-        for(int i = 2; i < listSize - 1; i++)
+        for(int i = 1; i < listSize; i++)
         {
             if(randomNumbersList.get(i) == x0) {
-                seqPeriod = i - 0;
-                break;
+                numbersCount++;
             }
         }
-        if(seqPeriod == 0)
-            seqPeriod = randomNumbersList.size();
-
+        if(numbersCount == 1)
+            seqPeriod = 0;
+        else
+            seqPeriod = numbersCount;
         System.out.println("Period: " + seqPeriod);
     }
 
     public void calculateAperiodicLength() {
-        if(seqPeriod!= 0)
-            seqAperiodicLength = n % seqPeriod;
-
-        else
-            seqAperiodicLength = 0;
+        double testNumber = randomNumbersList.get(0);
+        int listSize = randomNumbersList.size();
+        seqAperiodicLength = 0;
+        for(int i = 1; i < listSize; ++i)
+            if(randomNumbersList.get(i) == testNumber)
+            {
+                seqAperiodicLength = i - 0;
+                break;
+            }
+        if(seqAperiodicLength == 0)
+            seqAperiodicLength = listSize;
     }
 
     public void calculateAverage()

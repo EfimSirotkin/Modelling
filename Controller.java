@@ -76,10 +76,7 @@ public class Controller implements Initializable {
         for(int i = 0; i < RandomGenerator.n; i++)
             tempR = randomGenerator.Lemer(aFieldValue, mFieldValue, tempR);
 
-        System.out.println(randomGenerator.getRandomNumbersList());
-
         Main.histogramDataRetriever.calculateFrequencies(randomGenerator.getRandomNumbersList());
-        System.out.println(Main.histogramDataRetriever.getFrequenciesList());
 
         HistogramChart.getData().add(getHistogramBarChartSeries());
 
